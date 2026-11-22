@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Panel de promociones</title>
+  <link rel="icon" href="/img/icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/admin.css">
+  <script type="module" src="/js/admin.js"></script>
+</head>
+<body>
+  <header class="barra">
+    <div class="titulo">
+      <h1>Panel de promociones</h1>
+      <p id="usuario" class="usuario"></p>
+    </div>
+    <nav class="acciones-barra">
+      <a href="/" target="_blank" rel="noopener">Ver página</a>
+      <a href="/.auth/logout?post_logout_redirect_uri=/login.html">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <main class="principal">
+    <div class="cabecera-lista">
+      <div>
+        <h2>Promociones</h2>
+        <p class="ayuda">Se muestran en este orden en el carrusel. Solo aparecen las que están <b>visibles</b>.</p>
+      </div>
+      <button type="button" class="btn primario" id="nueva">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        Nueva promoción
+      </button>
+    </div>
+
+    <p id="mensajeLista" class="mensaje-lista">Cargando…</p>
+    <ul id="lista" class="lista"></ul>
+  </main>
+
+  <!-- Editor -->
+  <dialog id="editor" class="dialogo" aria-labelledby="tituloEditor">
+    <form id="formulario" method="dialog" novalidate>
+      <header class="dialogo-cabecera">
+        <h2 id="tituloEditor">Nueva promoción</h2>
+        <button type="button" class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+      </header>
+
+      <div class="dialogo-cuerpo">
+        <div class="campo-imagen">
+          <label class="zona-imagen" id="zonaImagen">
+            <input type="file" id="archivo" accept="image/jpeg,image/png,image/webp" hidden>
+            <img id="vistaPrevia" alt="" hidden>
+            <span class="zona-texto" id="zonaTexto">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16l4-4 4 4 3-3 5 5M4 6h16v12H4zM15 9.5h.01"/></svg>
+              <b>Toca para elegir la imagen</b>
+              <small>JPG, PNG o WebP. Se optimiza automáticamente.</small>
+            </span>
+          </label>
+          <button type="button" class="btn enlace" id="cambiarImagen" hidden>Cambiar imagen</button>
+        </div>
+
+        <div class="campos">
+          <label class="campo">
+            <span>Establecimiento *</span>
+            <input name="establecimiento" maxlength="80" required autocomplete="off" placeholder="Ej. Café La Esquina">
+          </label>
+          <label class="campo">
+            <span>Descuento o promoción *</span>
+            <input name="descuento" maxlength="60" required autocomplete="off" placeholder="Ej. 15% de descuento">
+          </label>
+          <label class="campo">
+            <span>Descripción <small>(opcional)</small></span>
+            <textarea name="descripcion" maxlength="300" rows="3" placeholder="Condiciones, horarios, productos que aplican…"></textarea>
+          </label>
+          <label class="campo">
+            <span>Enlace <small>(opcional: WhatsApp, Google Maps, sitio web o tel:)</small></span>
+            <input name="enlace" maxlength="500" autocomplete="off" inputmode="url" placeholder="https://wa.me/52833…">
+          </label>
+          <div class="fila">
+            <label class="campo">
+              <span>Visible desde <small>(opcional)</small></span>
+              <input type="date" name="vigenciaDesde">
+            </label>
+            <label class="campo">
+              <span>Visible hasta <small>(opcional)</small></span>
+              <input type="date" name="vigenciaHasta">
+            </label>
+          </div>
+          <label class="interruptor">
+            <input type="checkbox" name="activa" checked>
+            <span class="pista-interruptor" aria-hidden="true"></span>
+            <span>Mostrar en el carrusel</span>
+          </label>
+        </div>
+
+        <div id="errores" class="errores" role="alert" hidden></div>
+      </div>
+
+      <footer class="dialogo-pie">
+        <button type="button" class="btn" data-cerrar>Cancelar</button>
+        <button type="submit" class="btn primario" id="guardar">Guardar</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- Confirmación para eliminar -->
+  <dialog id="confirmar" class="dialogo chico" aria-labelledby="tituloConfirmar">
+    <form method="dialog">
+      <div class="dialogo-cuerpo">
+        <h2 id="tituloConfirmar">¿Eliminar promoción?</h2>
+        <p id="textoConfirmar"></p>
+      </div>
+      <footer class="dialogo-pie">
+        <button value="no" class="btn">Cancelar</button>
+        <button value="si" class="btn peligro">Eliminar</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
+</body>
+</html>

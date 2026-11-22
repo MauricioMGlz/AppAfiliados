@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Promociones para afiliados</title>
+  <meta name="description" content="Descuentos y promociones exclusivas para afiliados. Presenta tu tarjeta en los establecimientos participantes.">
+  <meta name="theme-color" content="#f6f3ee">
+  <link rel="icon" href="/img/icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/carrusel.css">
+  <script type="module" src="/js/carrusel.js"></script>
+</head>
+<body>
+  <!-- Cambia estos textos por el nombre de tu tarjeta / negocio -->
+  <header class="encabezado">
+    <p class="marca">Tarjeta de Afiliado</p>
+    <h1>Promociones vigentes</h1>
+  </header>
+
+  <main class="contenido">
+    <section class="carrusel" id="carrusel" aria-roledescription="carrusel" aria-label="Promociones" hidden>
+      <div class="pista" id="pista" tabindex="0" aria-live="off"></div>
+      <button type="button" class="flecha anterior" id="anterior" aria-label="Promoción anterior">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <button type="button" class="flecha siguiente" id="siguiente" aria-label="Siguiente promoción">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </section>
+
+    <nav class="puntos" id="puntos" aria-label="Elegir promoción" hidden></nav>
+
+    <div class="estado" id="estado" role="status">
+      <div class="cargando" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p>Cargando promociones…</p>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <p>Presenta tu tarjeta de afiliado al pagar para aplicar el descuento.</p>
+  </footer>
+</body>
+</html>

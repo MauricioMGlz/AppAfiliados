@@ -1,0 +1,290 @@
+/* ===== Ajusta aquí los colores de tu marca ===== */
+:root {
+  --fondo: #f6f3ee;
+  --tinta: #1d1b19;
+  --tinta-suave: #6b645c;
+  --acento: #d9480f;
+  --acento-tinta: #ffffff;
+  --tarjeta: #ffffff;
+  --radio: 22px;
+  --sombra: 0 18px 40px -18px rgba(40, 25, 10, .35);
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* ---------- Encabezado ---------- */
+.encabezado {
+  text-align: center;
+  padding: 22px 20px 12px;
+}
+.marca {
+  margin: 0 0 4px;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+.encabezado h1 {
+  margin: 0;
+  font-size: clamp(1.35rem, 4.5vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: -.01em;
+}
+
+/* ---------- Carrusel ---------- */
+.contenido {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.carrusel {
+  position: relative;
+  flex: 1;
+  display: flex;
+  min-height: 480px;
+}
+.carrusel[hidden] { display: none; }
+
+.pista {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  outline: none;
+}
+.pista::-webkit-scrollbar { display: none; }
+.pista:focus-visible { box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--acento) 45%, transparent); border-radius: var(--radio); }
+
+.slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 6px 16px 4px;
+  min-width: 0;
+}
+
+.foto {
+  position: relative;
+  flex: 1;
+  min-height: 240px;
+  border-radius: var(--radio);
+  overflow: hidden;
+  background: #2a2622;
+  box-shadow: var(--sombra);
+}
+/* Fondo difuminado con la misma imagen: así cualquier proporción se ve bien. */
+.foto .difuminado {
+  position: absolute;
+  inset: -30px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(26px) brightness(.75) saturate(1.2);
+  transform: scale(1.05);
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.foto.lista .difuminado { opacity: 1; }
+.foto img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.foto.lista img { opacity: 1; }
+
+.info {
+  background: var(--tarjeta);
+  border-radius: var(--radio);
+  padding: 16px 18px 18px;
+  box-shadow: 0 6px 20px -12px rgba(40, 25, 10, .25);
+}
+.descuento {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--acento);
+  color: var(--acento-tinta);
+  font-weight: 800;
+  font-size: .95rem;
+  line-height: 1.2;
+}
+.info h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+.info .descripcion {
+  margin: 6px 0 0;
+  color: var(--tinta-suave);
+  line-height: 1.45;
+  font-size: .97rem;
+}
+.info .vigencia {
+  margin: 10px 0 0;
+  font-size: .82rem;
+  color: var(--tinta-suave);
+}
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 11px 18px;
+  border-radius: 12px;
+  background: var(--tinta);
+  color: #fff;
+  font-weight: 700;
+  font-size: .95rem;
+  text-decoration: none;
+}
+.boton:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
+.boton svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Flechas: solo en equipos con mouse */
+.flecha {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 6px 18px -6px rgba(0, 0, 0, .35);
+  cursor: pointer;
+  display: none;
+  place-items: center;
+  color: var(--tinta);
+}
+.flecha svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.flecha:hover { background: #fff; }
+.flecha:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
+.anterior { left: 26px; }
+.siguiente { right: 26px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .carrusel.varias .flecha { display: grid; }
+}
+
+/* Puntos */
+.puntos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 16px 6px;
+}
+.puntos[hidden] { display: none; }
+.punto {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tinta) 22%, transparent);
+  cursor: pointer;
+  transition: width .25s ease, background .25s ease;
+}
+.punto[aria-current="true"] { width: 26px; background: var(--acento); }
+.punto:focus-visible { outline: 3px solid var(--acento); outline-offset: 3px; }
+
+/* Estado (cargando / vacío / error) */
+.estado {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--tinta-suave);
+}
+.estado[hidden] { display: none; }
+.estado p { margin: 0; max-width: 32ch; line-height: 1.5; }
+.estado .reintentar {
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--tinta);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.cargando { display: flex; gap: 7px; }
+.cargando span {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--acento);
+  animation: rebote 1s infinite ease-in-out;
+}
+.cargando span:nth-child(2) { animation-delay: .15s; }
+.cargando span:nth-child(3) { animation-delay: .3s; }
+@keyframes rebote { 0%, 80%, 100% { transform: scale(.5); opacity: .4; } 40% { transform: scale(1); opacity: 1; } }
+
+/* Pie */
+.pie {
+  padding: 10px 20px 20px;
+  text-align: center;
+  font-size: .82rem;
+  color: var(--tinta-suave);
+}
+.pie p { margin: 0; }
+
+/* ---------- Pantallas grandes: imagen a la izquierda, datos a la derecha ---------- */
+@media (min-width: 860px) {
+  .encabezado { padding-top: 34px; }
+  .carrusel { min-height: 520px; max-height: 720px; }
+  .slide {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 24px;
+    padding: 8px 88px 28px;
+  }
+  .foto { flex: 3; }
+  .info {
+    flex: 2;
+    align-self: center;
+    padding: 28px 28px 30px;
+  }
+  .info h2 { font-size: 1.75rem; }
+  .descuento { font-size: 1.05rem; }
+  .flecha { top: 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pista { scroll-behavior: auto; }
+  .foto img, .foto .difuminado, .punto { transition: none; }
+  .cargando span { animation: none; opacity: .8; }
+}

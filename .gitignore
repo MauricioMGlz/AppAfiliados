@@ -1,0 +1,12 @@
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+api/local.settings.json
+.azurite/
+__azurite_*
+__blobstorage__/
+__queuestorage__/
+node_modules/
+.DS_Store
